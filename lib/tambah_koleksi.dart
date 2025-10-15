@@ -7,8 +7,13 @@ void tambahKoleksi() {
   stdout.write('Masukkan Deskripsi Koleksi: ');
   String deskripsi = stdin.readLineSync()!;
   stdout.write('Masukkan Tahun Koleksi: ');
-  int tahun = int.parse(stdin.readLineSync()!);
-
+  // Menggunakan int.tryParse untuk penanganan error yang lebih baik
+  int? tahun = int.tryParse(stdin.readLineSync() ?? '');
+  // Validasi input tahun
+  if (tahun == null || tahun <= 0) {
+    print('Tahun tidak valid. Gagal menambahkan koleksi.');
+    return;
+  }
   Koleksi koleksiBaru = Koleksi(nama, deskripsi, tahun);
   daftarKoleksi.add(koleksiBaru);
   print('Koleksi "$nama" berhasil ditambahkan!');
