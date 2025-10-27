@@ -1,4 +1,4 @@
-import 'package:tugas_utp/tugas_utp.dart';
+import 'package:tugas_utp/ta_pbo.dart';
 import 'package:test/test.dart';
 
 void main() {
