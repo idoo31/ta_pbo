@@ -8,7 +8,7 @@ void hapusKoleksi() {
     return;
   }
   for (int i = 0; i < daftarKoleksi.length; i++) {
-    print('${i + 1}. ${daftarKoleksi[i].nama}');
+    print('${i + 1}. ${daftarKoleksi[i].id} - ${daftarKoleksi[i].nama}');
   }
   stdout.write('Pilih nomor koleksi yang ingin dihapus: ');
   int pilihan = int.tryParse(stdin.readLineSync() ?? '') ?? 0;

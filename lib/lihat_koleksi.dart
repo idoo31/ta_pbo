@@ -9,7 +9,7 @@ void lihatKoleksi() {
   }
 
   for (int i = 0; i < daftarKoleksi.length; i++) {
-    print('${i + 1}. ${daftarKoleksi[i].nama}');
+    print('${i + 1}. ${daftarKoleksi[i].id} - ${daftarKoleksi[i].nama}');
   }
 
   stdout.write(
@@ -22,6 +22,7 @@ void lihatKoleksi() {
   if (pilihan > 0 && pilihan <= daftarKoleksi.length) {
     Koleksi koleksi = daftarKoleksi[pilihan - 1];
     print('\n--- Detail Koleksi: ${koleksi.nama} ---');
+    print("ID: ${koleksi.id}");
     print('Deskripsi: ${koleksi.deskripsi}');
     print('Tahun: ${koleksi.tahun}');
   } else {

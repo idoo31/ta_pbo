@@ -9,7 +9,7 @@ void updateKoleksi() {
   }
 
   for (int i = 0; i < daftarKoleksi.length; i++) {
-    print('${i + 1}. ${daftarKoleksi[i].nama}');
+    print('${i + 1}. ${daftarKoleksi[i].id} - ${daftarKoleksi[i].nama}');
   }
 
   stdout.write('Pilih nomor koleksi yang ingin diupdate: ');
@@ -17,6 +17,10 @@ void updateKoleksi() {
 
   if (pilihan != null && pilihan > 0 && pilihan <= daftarKoleksi.length) {
     Koleksi koleksi = daftarKoleksi[pilihan - 1];
+
+    stdout.write('ID baru (${koleksi.id}): ');
+    String idBaru = stdin.readLineSync()!;
+    if (idBaru.isNotEmpty) koleksi.id = idBaru;
 
     stdout.write('Nama baru (${koleksi.nama}): ');
     String namaBaru = stdin.readLineSync()!;
