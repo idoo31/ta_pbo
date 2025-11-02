@@ -5,7 +5,7 @@ class Koleksi {
   String _deskripsi;
   int _tahun;
   // Constructor
-  Koleksi(this._id,this._nama, this._deskripsi, this._tahun);
+  Koleksi(this._id, this._nama, this._deskripsi, this._tahun);
   // --- GETTER ---
   // Metode publik untuk mengakses (membaca) data private
   String get id => _id;
@@ -20,9 +20,11 @@ class Koleksi {
       _nama = namaBaru;
     }
   }
+
   set deskripsi(String deskripsiBaru) {
     _deskripsi = deskripsiBaru;
   }
+
   set tahun(int tahunBaru) {
     // Menambahkan validasi agar tahun tidak negatif
     if (tahunBaru > 0) {
@@ -30,5 +32,6 @@ class Koleksi {
     }
   }
 }
+
 // List untuk menyimpan semua objek koleksi
 List<Koleksi> daftarKoleksi = [];

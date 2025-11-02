@@ -1,4 +1,4 @@
-import 'package:interact_cli/interact_cli.dart'; 
+import 'package:interact_cli/interact_cli.dart';
 import 'koleksi.dart';
 
 void updateKoleksi() {
