@@ -8,13 +8,16 @@ import 'package:ta_pbo/hapus_koleksi.dart';
 final Console console = Console();
 void main() {
   console.clearScreen();
+  console.setTextStyle(bold: true);
+  console.setForegroundColor(ConsoleColor.yellow);
+  console.writeLine(
+    'Sistem Manajemen Barang Koleksi Museum',
+    TextAlignment.center,
+  );
   while (true) {
     console.setTextStyle(bold: true);
     console.setForegroundColor(ConsoleColor.brightBlue);
-    console.writeLine(
-      'Sistem Manajemen Barang Koleksi Museum',
-      TextAlignment.center,
-    );
+
     int pilihan = Select(
       prompt: "Pilih Menu",
       options: [
