@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:interact_cli/interact_cli.dart';
 import 'koleksi.dart';
 
 void tambahKoleksi() {
@@ -7,8 +7,8 @@ void tambahKoleksi() {
 
   // Loop sampai mendapatkan ID yang valid dan unik
   do {
-    stdout.write("Masukkan ID koleksi: ");
-    id = stdin.readLineSync()!;
+    // Diubah
+    id = Input(prompt: "Masukkan ID koleksi: ").interact();
 
     // Cek apakah ID sudah ada
     bool idExists = daftarKoleksi.any((koleksi) => koleksi.id == id);
@@ -20,17 +20,18 @@ void tambahKoleksi() {
     }
   } while (!isIdValid);
 
-  stdout.write('Masukkan Nama Koleksi: ');
-  String nama = stdin.readLineSync()!;
-  stdout.write('Masukkan Deskripsi Koleksi: ');
-  String deskripsi = stdin.readLineSync()!;
-  stdout.write('Masukkan Tahun Koleksi: ');
+  String nama = Input(prompt: 'Masukkan Nama Koleksi: ').interact();
+  String deskripsi = Input(prompt: 'Masukkan Deskripsi Koleksi: ').interact();
 
-  int? tahun = int.tryParse(stdin.readLineSync() ?? '');
-  if (tahun == null || tahun <= 0) {
-    print('Tahun tidak valid. Gagal menambahkan koleksi.');
-    return;
-  }
+  int? tahun;
+  do {
+    String inputTahun = Input(prompt: 'Masukkan Tahun Koleksi: ').interact();
+    tahun = int.tryParse(inputTahun);
+
+    if (tahun == null || tahun <= 0) {
+      print('Tahun tidak valid. Masukkan angka yang benar (lebih dari 0).');
+    }
+  } while (tahun == null || tahun <= 0);
 
   Koleksi koleksiBaru = Koleksi(id, nama, deskripsi, tahun);
   daftarKoleksi.add(koleksiBaru);

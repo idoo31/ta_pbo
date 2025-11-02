@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:interact_cli/interact_cli.dart'; 
 import 'koleksi.dart';
 
 void updateKoleksi() {
@@ -12,29 +12,40 @@ void updateKoleksi() {
     print('${i + 1}. ${daftarKoleksi[i].id} - ${daftarKoleksi[i].nama}');
   }
 
-  stdout.write('Pilih nomor koleksi yang ingin diupdate: ');
-  int? pilihan = int.tryParse(stdin.readLineSync() ?? '');
+  String inputPilihan = Input(
+    prompt: 'Pilih nomor koleksi yang ingin diupdate: ',
+  ).interact();
+  int? pilihan = int.tryParse(inputPilihan);
 
   if (pilihan != null && pilihan > 0 && pilihan <= daftarKoleksi.length) {
     Koleksi koleksi = daftarKoleksi[pilihan - 1];
 
-    stdout.write('ID baru (${koleksi.id}): ');
-    String idBaru = stdin.readLineSync()!;
+    String idBaru = Input(
+      prompt: 'ID baru',
+      defaultValue: koleksi.id,
+    ).interact();
     if (idBaru.isNotEmpty) koleksi.id = idBaru;
 
-    stdout.write('Nama baru (${koleksi.nama}): ');
-    String namaBaru = stdin.readLineSync()!;
+    String namaBaru = Input(
+      prompt: 'Nama baru',
+      defaultValue: koleksi.nama,
+    ).interact();
     if (namaBaru.isNotEmpty) koleksi.nama = namaBaru;
 
-    stdout.write('Deskripsi baru (${koleksi.deskripsi}): ');
-    String deskripsiBaru = stdin.readLineSync()!;
+    String deskripsiBaru = Input(
+      prompt: 'Deskripsi baru',
+      defaultValue: koleksi.deskripsi,
+    ).interact();
     if (deskripsiBaru.isNotEmpty) koleksi.deskripsi = deskripsiBaru;
 
-    stdout.write('Tahun baru (${koleksi.tahun}): ');
-    String inputTahunBaru = stdin.readLineSync()!;
+    String inputTahunBaru = Input(
+      prompt: 'Tahun baru',
+      defaultValue: koleksi.tahun.toString(),
+    ).interact();
+
     if (inputTahunBaru.isNotEmpty) {
       int? tahunBaru = int.tryParse(inputTahunBaru);
-      if (tahunBaru != null) {
+      if (tahunBaru != null && tahunBaru > 0) {
         koleksi.tahun = tahunBaru;
       }
     }

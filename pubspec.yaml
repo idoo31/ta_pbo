@@ -9,6 +9,8 @@ environment:
 # Add regular dependencies here.
 dependencies:
   path: ^1.9.0
+  dart_console: ^4.1.2
+  interact_cli: ^2.4.0
 
 dev_dependencies:
   lints: ^6.0.0

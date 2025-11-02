@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:interact_cli/interact_cli.dart';
 import 'koleksi.dart';
 
 void lihatKoleksi() {
@@ -12,14 +12,15 @@ void lihatKoleksi() {
     print('${i + 1}. ${daftarKoleksi[i].id} - ${daftarKoleksi[i].nama}');
   }
 
-  stdout.write(
-    '\nPilih nomor koleksi untuk melihat detailnya (atau tekan Enter untuk kembali): ',
-  );
-  String? input = stdin.readLineSync();
-  if (input == null || input.isEmpty) return;
-  int pilihan = int.tryParse(input) ?? 0;
+  String input = Input(
+    prompt:
+        '\nPilih nomor koleksi untuk melihat detailnya (atau tekan Enter untuk kembali): ',
+  ).interact();
 
-  if (pilihan > 0 && pilihan <= daftarKoleksi.length) {
+  if (input.isEmpty) return;
+  int? pilihan = int.tryParse(input);
+
+  if (pilihan != null && pilihan > 0 && pilihan <= daftarKoleksi.length) {
     Koleksi koleksi = daftarKoleksi[pilihan - 1];
     print('\n--- Detail Koleksi: ${koleksi.nama} ---');
     print("ID: ${koleksi.id}");
