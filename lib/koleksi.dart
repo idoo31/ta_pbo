@@ -6,7 +6,7 @@ class Koleksi {
   int _tahun;
   // Constructor
   Koleksi(this._id, this._nama, this._deskripsi, this._tahun);
-  
+
   // --- GETTER ---
   // Metode publik untuk mengakses (membaca) data private
   String get id => _id;

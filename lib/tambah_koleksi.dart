@@ -1,11 +1,10 @@
 import 'package:interact_cli/interact_cli.dart';
 import 'koleksi.dart';
-import 'lukisan.dart';     // <-- Impor file baru
-import 'patung.dart';       // <-- Impor file baru
-import 'fotografi.dart';  // <-- Impor file baru
+import 'lukisan.dart';
+import 'patung.dart';
+import 'fotografi.dart';
 
 void tambahKoleksi() {
-  // Tanya jenis koleksi
   int jenis = Select(
     prompt: "Pilih Jenis Koleksi Seni:",
     options: ['Koleksi Umum', 'Lukisan', 'Patung', 'Fotografi'],
@@ -13,7 +12,6 @@ void tambahKoleksi() {
 
   String id;
   bool isIdValid = false;
-  // Loop validasi ID (sama seperti sebelumnya)
   do {
     id = Input(prompt: "Masukkan ID koleksi: ").interact();
     bool idExists = daftarKoleksi.any((koleksi) => koleksi.id == id);
@@ -24,7 +22,6 @@ void tambahKoleksi() {
     }
   } while (!isIdValid);
 
-  // Data umum (dimiliki semua koleksi)
   String nama = Input(prompt: 'Masukkan Nama Karya: ').interact();
   String deskripsi = Input(prompt: 'Masukkan Deskripsi Karya: ').interact();
   int? tahun;
@@ -36,35 +33,31 @@ void tambahKoleksi() {
     }
   } while (tahun == null || tahun <= 0);
 
-  Koleksi koleksiBaru; // Deklarasikan variabel untuk menampung objek baru
+  Koleksi koleksiBaru;
 
-  // Tanya data spesifik berdasarkan jenis
   switch (jenis) {
     case 1: // Lukisan
       String pelukis = Input(prompt: 'Masukkan Nama Pelukis: ').interact();
-      String media = Input(prompt: 'Masukkan Media Lukisan (cth: Cat minyak di kanvas): ').interact();
       // Buat objek Lukisan
-      koleksiBaru = Lukisan(id, nama, deskripsi, tahun, pelukis, media);
+      koleksiBaru = Lukisan(id, nama, deskripsi, tahun, pelukis);
       break;
     case 2: // Patung
-      String pematung = Input(prompt: 'Masukkan Nama Pematung: ').interact();
-      String bahan = Input(prompt: 'Masukkan Bahan Patung (cth: Marmer): ').interact();
-      // Buat objek Patung
-      koleksiBaru = Patung(id, nama, deskripsi, tahun, pematung, bahan);
+      String pematung = Input(
+        prompt: 'Masukkan Nama Pembuat Patung: ',
+      ).interact();
+      koleksiBaru = Patung(id, nama, deskripsi, tahun, pematung);
       break;
     case 3: // Fotografi
-      String fotografer = Input(prompt: 'Masukkan Nama Fotografer: ').interact();
-      String jenisCetak = Input(prompt: 'Masukkan Jenis Cetak (cth: Digital Print): ').interact();
-      // Buat objek Fotografi
-      koleksiBaru = Fotografi(id, nama, deskripsi, tahun, fotografer, jenisCetak);
+      String fotografer = Input(
+        prompt: 'Masukkan Nama Fotografer: ',
+      ).interact();
+      koleksiBaru = Fotografi(id, nama, deskripsi, tahun, fotografer);
       break;
     default: // 0: Koleksi Umum
-      // Buat objek Koleksi biasa
       koleksiBaru = Koleksi(id, nama, deskripsi, tahun);
       break;
   }
 
-  // Tambahkan objek baru ke daftar (polimorfisme)
   daftarKoleksi.add(koleksiBaru);
   print('Karya "$nama" berhasil ditambahkan!');
 }

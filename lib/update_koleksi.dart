@@ -1,8 +1,8 @@
 import 'package:interact_cli/interact_cli.dart';
 import 'koleksi.dart';
-import 'lukisan.dart';     // <-- Impor file baru
-import 'patung.dart';       // <-- Impor file baru
-import 'fotografi.dart';  // <-- Impor file baru
+import 'lukisan.dart';
+import 'patung.dart';
+import 'fotografi.dart';
 
 void updateKoleksi() {
   print('\n--- Update Karya Seni ---');
@@ -55,16 +55,11 @@ void updateKoleksi() {
       }
     }
 
-    // --- Update data spesifik (Polimorfisme) ---
     if (koleksi is Lukisan) {
       print('--- Mengupdate data spesifik Lukisan ---');
       koleksi.pelukis = Input(
         prompt: 'Pelukis baru',
         defaultValue: koleksi.pelukis,
-      ).interact();
-      koleksi.media = Input(
-        prompt: 'Media baru',
-        defaultValue: koleksi.media,
       ).interact();
     } else if (koleksi is Patung) {
       print('--- Mengupdate data spesifik Patung ---');
@@ -72,19 +67,11 @@ void updateKoleksi() {
         prompt: 'Pematung baru',
         defaultValue: koleksi.pematung,
       ).interact();
-      koleksi.bahan = Input(
-        prompt: 'Bahan baru',
-        defaultValue: koleksi.bahan,
-      ).interact();
     } else if (koleksi is Fotografi) {
       print('--- Mengupdate data spesifik Fotografi ---');
       koleksi.fotografer = Input(
         prompt: 'Fotografer baru',
         defaultValue: koleksi.fotografer,
-      ).interact();
-      koleksi.jenisCetak = Input(
-        prompt: 'Jenis Cetak baru',
-        defaultValue: koleksi.jenisCetak,
       ).interact();
     }
 
