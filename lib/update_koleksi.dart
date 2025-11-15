@@ -1,10 +1,13 @@
 import 'package:interact_cli/interact_cli.dart';
 import 'koleksi.dart';
+import 'lukisan.dart';     // <-- Impor file baru
+import 'patung.dart';       // <-- Impor file baru
+import 'fotografi.dart';  // <-- Impor file baru
 
 void updateKoleksi() {
-  print('\n--- Update Koleksi ---');
+  print('\n--- Update Karya Seni ---');
   if (daftarKoleksi.isEmpty) {
-    print('Belum ada koleksi yang disimpan.');
+    print('Belum ada karya seni yang disimpan.');
     return;
   }
 
@@ -13,13 +16,15 @@ void updateKoleksi() {
   }
 
   String inputPilihan = Input(
-    prompt: 'Pilih nomor koleksi yang ingin diupdate: ',
+    prompt: 'Pilih nomor karya yang ingin diupdate: ',
   ).interact();
   int? pilihan = int.tryParse(inputPilihan);
 
   if (pilihan != null && pilihan > 0 && pilihan <= daftarKoleksi.length) {
     Koleksi koleksi = daftarKoleksi[pilihan - 1];
 
+    print('--- Mengupdate data umum (Kosongkan jika tidak ingin diubah) ---');
+    // Update data umum
     String idBaru = Input(
       prompt: 'ID baru',
       defaultValue: koleksi.id,
@@ -50,7 +55,40 @@ void updateKoleksi() {
       }
     }
 
-    print('Koleksi berhasil diupdate!');
+    // --- Update data spesifik (Polimorfisme) ---
+    if (koleksi is Lukisan) {
+      print('--- Mengupdate data spesifik Lukisan ---');
+      koleksi.pelukis = Input(
+        prompt: 'Pelukis baru',
+        defaultValue: koleksi.pelukis,
+      ).interact();
+      koleksi.media = Input(
+        prompt: 'Media baru',
+        defaultValue: koleksi.media,
+      ).interact();
+    } else if (koleksi is Patung) {
+      print('--- Mengupdate data spesifik Patung ---');
+      koleksi.pematung = Input(
+        prompt: 'Pematung baru',
+        defaultValue: koleksi.pematung,
+      ).interact();
+      koleksi.bahan = Input(
+        prompt: 'Bahan baru',
+        defaultValue: koleksi.bahan,
+      ).interact();
+    } else if (koleksi is Fotografi) {
+      print('--- Mengupdate data spesifik Fotografi ---');
+      koleksi.fotografer = Input(
+        prompt: 'Fotografer baru',
+        defaultValue: koleksi.fotografer,
+      ).interact();
+      koleksi.jenisCetak = Input(
+        prompt: 'Jenis Cetak baru',
+        defaultValue: koleksi.jenisCetak,
+      ).interact();
+    }
+
+    print('Karya seni berhasil diupdate!');
   } else {
     print('Nomor koleksi tidak valid.');
   }
